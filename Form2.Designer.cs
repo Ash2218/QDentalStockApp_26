@@ -33,13 +33,14 @@
             this.txtConsumable = new System.Windows.Forms.TextBox();
             this.btnSearchItem = new System.Windows.Forms.Button();
             this.btnBack = new System.Windows.Forms.Button();
-            this.btnAddItem = new System.Windows.Forms.Button();
             this.dgvItems = new System.Windows.Forms.DataGridView();
             this.qDentalDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.qDentalDataSet = new QDentalStockApp26.QDentalDataSet();
             this.itemsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.itemsTableAdapter = new QDentalStockApp26.QDentalDataSetTableAdapters.ItemsTableAdapter();
             this.tableAdapterManager = new QDentalStockApp26.QDentalDataSetTableAdapters.TableAdapterManager();
+            this.lblEnter = new System.Windows.Forms.Label();
+            this.btnNext = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.qDentalDataSetBindingSource)).BeginInit();
@@ -49,10 +50,11 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnNext);
+            this.panel1.Controls.Add(this.lblEnter);
             this.panel1.Controls.Add(this.txtConsumable);
             this.panel1.Controls.Add(this.btnSearchItem);
             this.panel1.Controls.Add(this.btnBack);
-            this.panel1.Controls.Add(this.btnAddItem);
             this.panel1.Controls.Add(this.dgvItems);
             this.panel1.Location = new System.Drawing.Point(-2, -1);
             this.panel1.Name = "panel1";
@@ -63,16 +65,17 @@
             // txtConsumable
             // 
             this.txtConsumable.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtConsumable.Location = new System.Drawing.Point(428, 486);
+            this.txtConsumable.Location = new System.Drawing.Point(399, 399);
             this.txtConsumable.Name = "txtConsumable";
-            this.txtConsumable.Size = new System.Drawing.Size(141, 34);
+            this.txtConsumable.Size = new System.Drawing.Size(219, 34);
             this.txtConsumable.TabIndex = 4;
             // 
             // btnSearchItem
             // 
-            this.btnSearchItem.Location = new System.Drawing.Point(245, 479);
+            this.btnSearchItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSearchItem.Location = new System.Drawing.Point(399, 456);
             this.btnSearchItem.Name = "btnSearchItem";
-            this.btnSearchItem.Size = new System.Drawing.Size(177, 41);
+            this.btnSearchItem.Size = new System.Drawing.Size(219, 41);
             this.btnSearchItem.TabIndex = 3;
             this.btnSearchItem.Text = "Search Item";
             this.btnSearchItem.UseVisualStyleBackColor = true;
@@ -87,16 +90,6 @@
             this.btnBack.Text = "Back";
             this.btnBack.UseVisualStyleBackColor = true;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
-            // 
-            // btnAddItem
-            // 
-            this.btnAddItem.Location = new System.Drawing.Point(24, 479);
-            this.btnAddItem.Name = "btnAddItem";
-            this.btnAddItem.Size = new System.Drawing.Size(163, 41);
-            this.btnAddItem.TabIndex = 1;
-            this.btnAddItem.Text = "Add Item";
-            this.btnAddItem.UseVisualStyleBackColor = true;
-            this.btnAddItem.Click += new System.EventHandler(this.btnAddRec_Click);
             // 
             // dgvItems
             // 
@@ -140,6 +133,26 @@
             this.tableAdapterManager.UpdateOrder = QDentalStockApp26.QDentalDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             this.tableAdapterManager.VarianceTableAdapter = null;
             // 
+            // lblEnter
+            // 
+            this.lblEnter.AutoSize = true;
+            this.lblEnter.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEnter.Location = new System.Drawing.Point(14, 399);
+            this.lblEnter.Name = "lblEnter";
+            this.lblEnter.Size = new System.Drawing.Size(366, 29);
+            this.lblEnter.TabIndex = 5;
+            this.lblEnter.Text = "Enter consumable or inventory ID";
+            // 
+            // btnNext
+            // 
+            this.btnNext.Location = new System.Drawing.Point(853, 469);
+            this.btnNext.Name = "btnNext";
+            this.btnNext.Size = new System.Drawing.Size(75, 23);
+            this.btnNext.TabIndex = 6;
+            this.btnNext.Text = "Next";
+            this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
+            // 
             // frmItems
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -163,7 +176,6 @@
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridView dgvItems;
-        private System.Windows.Forms.Button btnAddItem;
         private System.Windows.Forms.BindingSource qDentalDataSetBindingSource;
         private QDentalDataSet qDentalDataSet;
         private System.Windows.Forms.BindingSource itemsBindingSource;
@@ -172,5 +184,7 @@
         private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.Button btnSearchItem;
         private System.Windows.Forms.TextBox txtConsumable;
+        private System.Windows.Forms.Label lblEnter;
+        private System.Windows.Forms.Button btnNext;
     }
 }

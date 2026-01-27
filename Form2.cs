@@ -24,26 +24,6 @@ namespace QDentalStockApp26
         private void btnAddRec_Click(object sender, EventArgs e)
         { 
             
-
-
-           string sql = @" INSERT INTO dbo.Items(Consumable,Description,QuantityPPackage,UnitsPPackage,PricePPackage,PricePUnit) VALUES
-            (@Consumable,@Description,@QuantityPPackage,@UnitsPPackage,@PricePPackage,@PricePUnit);";
-
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            using (SqlCommand cmd = new SqlCommand(sql, conn))
-            {
-                cmd.Parameters.AddWithValue("@Consumable", "Bands");
-                cmd.Parameters.AddWithValue("@Description", "Braces rubber bands");
-                cmd.Parameters.AddWithValue("@QuantityPPackage", 10);
-                cmd.Parameters.AddWithValue("@UnitsPPackage", 1);
-                cmd.Parameters.AddWithValue("@PricePPackage", 120.50);
-                cmd.Parameters.AddWithValue("@PricePUnit", 12.05);
-
-                conn.Open();
-                cmd.ExecuteNonQuery();
-            }
-
-            LoadItems();
         }
         private void LoadItems()
         {
@@ -92,6 +72,7 @@ namespace QDentalStockApp26
 
             try
             {
+                txtConsumable.Text = txtConsumable.Text.Trim();
                 string query = @"SELECT * FROM dbo.Items WHERE Consumable LIKE @search OR InventoryID = @id";
 
                 using (SqlConnection con = new SqlConnection(connectionString))
@@ -119,6 +100,14 @@ namespace QDentalStockApp26
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
+
+        }
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            frmConsumables frmConsumables = new frmConsumables(); // login form
+            frmConsumables.Show();
+            this.Hide();
 
         }
     }
