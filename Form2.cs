@@ -116,5 +116,10 @@ namespace QDentalStockApp26
                 MessageBox.Show("Search failed: " + ex.Message);
             }
         }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
