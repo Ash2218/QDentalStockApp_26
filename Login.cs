@@ -40,6 +40,7 @@ namespace QDentalStockApp26
                 frmItems frm = new frmItems(); //items form
                 frm.Show();
                 this.Hide();
+                return;
 
                 //MessageBox.Show("Please enter username and password");
                 //txtUsername.Focus();

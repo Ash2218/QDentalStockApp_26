@@ -50,6 +50,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Consumables.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Consumables.Designer.cs">
+      <DependentUpon>Consumables.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -81,6 +87,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>QDentalDataSet.xsd</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Consumables.resx">
+      <DependentUpon>Consumables.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
