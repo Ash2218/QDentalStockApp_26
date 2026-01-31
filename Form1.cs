@@ -32,6 +32,8 @@ namespace QDentalStockApp26
 
         private void button1_Click(object sender, EventArgs e)
         {
+
+            //excell report code
             string connStr = "Data Source=.\\SQLEXPRESS;Initial Catalog=QDental;Integrated Security=True;Encrypt=False";
             SqlConnection conn = new SqlConnection(connStr);
             DataTable dt = new DataTable();
@@ -67,7 +69,7 @@ namespace QDentalStockApp26
                         worksheet.Cells[i + 2, j + 1] = dt.Rows[i][j];
                     }
                 }
-//
+
                 // Autofit columns
                 worksheet.Columns.AutoFit();
 
@@ -81,6 +83,7 @@ namespace QDentalStockApp26
             {
                 conn.Close();
             }
+        //--------------------
         }
 
         private void button2_Click(object sender, EventArgs e)
