@@ -16,7 +16,10 @@ namespace QDentalStockApp26
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+             Stock stock = new Stock();          // create shared data
+            Application.Run(new StockForm(stock));
+           //Application.Run(new Form1());
+
         }
     }
 }

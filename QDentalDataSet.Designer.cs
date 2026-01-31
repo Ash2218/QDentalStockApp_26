@@ -720,9 +720,9 @@ namespace QDentalStockApp26 {
             
             private global::System.Data.DataColumn columnQuantityPPackageC;
             
-            private global::System.Data.DataColumn columnUnitsPPackageC;
-            
             private global::System.Data.DataColumn columnQuantityPPackageO;
+            
+            private global::System.Data.DataColumn columnUnitsPPackageC;
             
             private global::System.Data.DataColumn columnUnitsPPackageO;
             
@@ -785,17 +785,17 @@ namespace QDentalStockApp26 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
-            public global::System.Data.DataColumn UnitsPPackageCColumn {
+            public global::System.Data.DataColumn QuantityPPackageOColumn {
                 get {
-                    return this.columnUnitsPPackageC;
+                    return this.columnQuantityPPackageO;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
-            public global::System.Data.DataColumn QuantityPPackageOColumn {
+            public global::System.Data.DataColumn UnitsPPackageCColumn {
                 get {
-                    return this.columnQuantityPPackageO;
+                    return this.columnUnitsPPackageC;
                 }
             }
             
@@ -844,14 +844,14 @@ namespace QDentalStockApp26 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
-            public MonthlyStockRow AddMonthlyStockRow(ItemsRow parentItemsRowByFK_Stock_Item, System.DateTime StockMonth, int QuantityPPackageC, int UnitsPPackageC, int QuantityPPackageO, int UnitsPPackageO) {
+            public MonthlyStockRow AddMonthlyStockRow(ItemsRow parentItemsRowByFK_Stock_Item, string StockMonth, int QuantityPPackageC, int QuantityPPackageO, int UnitsPPackageC, int UnitsPPackageO) {
                 MonthlyStockRow rowMonthlyStockRow = ((MonthlyStockRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         StockMonth,
                         QuantityPPackageC,
-                        UnitsPPackageC,
                         QuantityPPackageO,
+                        UnitsPPackageC,
                         UnitsPPackageO};
                 if ((parentItemsRowByFK_Stock_Item != null)) {
                     columnValuesArray[0] = parentItemsRowByFK_Stock_Item[0];
@@ -863,7 +863,7 @@ namespace QDentalStockApp26 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
-            public MonthlyStockRow FindByInventoryIDStockMonth(int InventoryID, System.DateTime StockMonth) {
+            public MonthlyStockRow FindByInventoryIDStockMonth(int InventoryID, string StockMonth) {
                 return ((MonthlyStockRow)(this.Rows.Find(new object[] {
                             InventoryID,
                             StockMonth})));
@@ -889,8 +889,8 @@ namespace QDentalStockApp26 {
                 this.columnInventoryID = base.Columns["InventoryID"];
                 this.columnStockMonth = base.Columns["StockMonth"];
                 this.columnQuantityPPackageC = base.Columns["QuantityPPackageC"];
-                this.columnUnitsPPackageC = base.Columns["UnitsPPackageC"];
                 this.columnQuantityPPackageO = base.Columns["QuantityPPackageO"];
+                this.columnUnitsPPackageC = base.Columns["UnitsPPackageC"];
                 this.columnUnitsPPackageO = base.Columns["UnitsPPackageO"];
             }
             
@@ -899,14 +899,14 @@ namespace QDentalStockApp26 {
             private void InitClass() {
                 this.columnInventoryID = new global::System.Data.DataColumn("InventoryID", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnInventoryID);
-                this.columnStockMonth = new global::System.Data.DataColumn("StockMonth", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                this.columnStockMonth = new global::System.Data.DataColumn("StockMonth", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnStockMonth);
                 this.columnQuantityPPackageC = new global::System.Data.DataColumn("QuantityPPackageC", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnQuantityPPackageC);
-                this.columnUnitsPPackageC = new global::System.Data.DataColumn("UnitsPPackageC", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnUnitsPPackageC);
                 this.columnQuantityPPackageO = new global::System.Data.DataColumn("QuantityPPackageO", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnQuantityPPackageO);
+                this.columnUnitsPPackageC = new global::System.Data.DataColumn("UnitsPPackageC", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUnitsPPackageC);
                 this.columnUnitsPPackageO = new global::System.Data.DataColumn("UnitsPPackageO", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnUnitsPPackageO);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
@@ -914,6 +914,7 @@ namespace QDentalStockApp26 {
                                 this.columnStockMonth}, true));
                 this.columnInventoryID.AllowDBNull = false;
                 this.columnStockMonth.AllowDBNull = false;
+                this.columnStockMonth.MaxLength = 10;
                 this.columnQuantityPPackageC.AllowDBNull = false;
                 this.columnQuantityPPackageO.AllowDBNull = false;
             }
@@ -1540,9 +1541,9 @@ namespace QDentalStockApp26 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
-            public System.DateTime StockMonth {
+            public string StockMonth {
                 get {
-                    return ((global::System.DateTime)(this[this.tableMonthlyStock.StockMonthColumn]));
+                    return ((string)(this[this.tableMonthlyStock.StockMonthColumn]));
                 }
                 set {
                     this[this.tableMonthlyStock.StockMonthColumn] = value;
@@ -1562,6 +1563,17 @@ namespace QDentalStockApp26 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public int QuantityPPackageO {
+                get {
+                    return ((int)(this[this.tableMonthlyStock.QuantityPPackageOColumn]));
+                }
+                set {
+                    this[this.tableMonthlyStock.QuantityPPackageOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
             public int UnitsPPackageC {
                 get {
                     try {
@@ -1573,17 +1585,6 @@ namespace QDentalStockApp26 {
                 }
                 set {
                     this[this.tableMonthlyStock.UnitsPPackageCColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
-            public int QuantityPPackageO {
-                get {
-                    return ((int)(this[this.tableMonthlyStock.QuantityPPackageOColumn]));
-                }
-                set {
-                    this[this.tableMonthlyStock.QuantityPPackageOColumn] = value;
                 }
             }
             
@@ -2396,50 +2397,50 @@ SELECT InventoryID, Consumable, Description, QuantityPPackage, UnitsPPackage, Pr
             tableMapping.ColumnMappings.Add("InventoryID", "InventoryID");
             tableMapping.ColumnMappings.Add("StockMonth", "StockMonth");
             tableMapping.ColumnMappings.Add("QuantityPPackageC", "QuantityPPackageC");
-            tableMapping.ColumnMappings.Add("UnitsPPackageC", "UnitsPPackageC");
             tableMapping.ColumnMappings.Add("QuantityPPackageO", "QuantityPPackageO");
+            tableMapping.ColumnMappings.Add("UnitsPPackageC", "UnitsPPackageC");
             tableMapping.ColumnMappings.Add("UnitsPPackageO", "UnitsPPackageO");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[MonthlyStock] WHERE (([InventoryID] = @Original_InventoryID) AND ([StockMonth] = @Original_StockMonth) AND ([QuantityPPackageC] = @Original_QuantityPPackageC) AND ((@IsNull_UnitsPPackageC = 1 AND [UnitsPPackageC] IS NULL) OR ([UnitsPPackageC] = @Original_UnitsPPackageC)) AND ([QuantityPPackageO] = @Original_QuantityPPackageO) AND ((@IsNull_UnitsPPackageO = 1 AND [UnitsPPackageO] IS NULL) OR ([UnitsPPackageO] = @Original_UnitsPPackageO)))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[MonthlyStock] WHERE (([InventoryID] = @Original_InventoryID) AND ([StockMonth] = @Original_StockMonth) AND ([QuantityPPackageC] = @Original_QuantityPPackageC) AND ([QuantityPPackageO] = @Original_QuantityPPackageO) AND ((@IsNull_UnitsPPackageC = 1 AND [UnitsPPackageC] IS NULL) OR ([UnitsPPackageC] = @Original_UnitsPPackageC)) AND ((@IsNull_UnitsPPackageO = 1 AND [UnitsPPackageO] IS NULL) OR ([UnitsPPackageO] = @Original_UnitsPPackageO)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_InventoryID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "InventoryID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_StockMonth", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "StockMonth", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_StockMonth", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "StockMonth", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_QuantityPPackageC", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "QuantityPPackageC", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_QuantityPPackageO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "QuantityPPackageO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_UnitsPPackageC", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UnitsPPackageC", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_UnitsPPackageC", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UnitsPPackageC", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_QuantityPPackageO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "QuantityPPackageO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_UnitsPPackageO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UnitsPPackageO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_UnitsPPackageO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UnitsPPackageO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[MonthlyStock] ([InventoryID], [StockMonth], [QuantityPPackageC], [UnitsPPackageC], [QuantityPPackageO], [UnitsPPackageO]) VALUES (@InventoryID, @StockMonth, @QuantityPPackageC, @UnitsPPackageC, @QuantityPPackageO, @UnitsPPackageO);
-SELECT InventoryID, StockMonth, QuantityPPackageC, UnitsPPackageC, QuantityPPackageO, UnitsPPackageO FROM MonthlyStock WHERE (InventoryID = @InventoryID) AND (StockMonth = @StockMonth)";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[MonthlyStock] ([InventoryID], [StockMonth], [QuantityPPackageC], [QuantityPPackageO], [UnitsPPackageC], [UnitsPPackageO]) VALUES (@InventoryID, @StockMonth, @QuantityPPackageC, @QuantityPPackageO, @UnitsPPackageC, @UnitsPPackageO);
+SELECT InventoryID, StockMonth, QuantityPPackageC, QuantityPPackageO, UnitsPPackageC, UnitsPPackageO FROM MonthlyStock WHERE (InventoryID = @InventoryID) AND (StockMonth = @StockMonth)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@InventoryID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "InventoryID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@StockMonth", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "StockMonth", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@StockMonth", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "StockMonth", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@QuantityPPackageC", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "QuantityPPackageC", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@UnitsPPackageC", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UnitsPPackageC", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@QuantityPPackageO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "QuantityPPackageO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@UnitsPPackageC", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UnitsPPackageC", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@UnitsPPackageO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UnitsPPackageO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[MonthlyStock] SET [InventoryID] = @InventoryID, [StockMonth] = @StockMonth, [QuantityPPackageC] = @QuantityPPackageC, [UnitsPPackageC] = @UnitsPPackageC, [QuantityPPackageO] = @QuantityPPackageO, [UnitsPPackageO] = @UnitsPPackageO WHERE (([InventoryID] = @Original_InventoryID) AND ([StockMonth] = @Original_StockMonth) AND ([QuantityPPackageC] = @Original_QuantityPPackageC) AND ((@IsNull_UnitsPPackageC = 1 AND [UnitsPPackageC] IS NULL) OR ([UnitsPPackageC] = @Original_UnitsPPackageC)) AND ([QuantityPPackageO] = @Original_QuantityPPackageO) AND ((@IsNull_UnitsPPackageO = 1 AND [UnitsPPackageO] IS NULL) OR ([UnitsPPackageO] = @Original_UnitsPPackageO)));
-SELECT InventoryID, StockMonth, QuantityPPackageC, UnitsPPackageC, QuantityPPackageO, UnitsPPackageO FROM MonthlyStock WHERE (InventoryID = @InventoryID) AND (StockMonth = @StockMonth)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[MonthlyStock] SET [InventoryID] = @InventoryID, [StockMonth] = @StockMonth, [QuantityPPackageC] = @QuantityPPackageC, [QuantityPPackageO] = @QuantityPPackageO, [UnitsPPackageC] = @UnitsPPackageC, [UnitsPPackageO] = @UnitsPPackageO WHERE (([InventoryID] = @Original_InventoryID) AND ([StockMonth] = @Original_StockMonth) AND ([QuantityPPackageC] = @Original_QuantityPPackageC) AND ([QuantityPPackageO] = @Original_QuantityPPackageO) AND ((@IsNull_UnitsPPackageC = 1 AND [UnitsPPackageC] IS NULL) OR ([UnitsPPackageC] = @Original_UnitsPPackageC)) AND ((@IsNull_UnitsPPackageO = 1 AND [UnitsPPackageO] IS NULL) OR ([UnitsPPackageO] = @Original_UnitsPPackageO)));
+SELECT InventoryID, StockMonth, QuantityPPackageC, QuantityPPackageO, UnitsPPackageC, UnitsPPackageO FROM MonthlyStock WHERE (InventoryID = @InventoryID) AND (StockMonth = @StockMonth)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@InventoryID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "InventoryID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@StockMonth", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "StockMonth", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@StockMonth", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "StockMonth", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@QuantityPPackageC", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "QuantityPPackageC", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@UnitsPPackageC", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UnitsPPackageC", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@QuantityPPackageO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "QuantityPPackageO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@UnitsPPackageC", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UnitsPPackageC", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@UnitsPPackageO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UnitsPPackageO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_InventoryID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "InventoryID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_StockMonth", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "StockMonth", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_StockMonth", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "StockMonth", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_QuantityPPackageC", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "QuantityPPackageC", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_QuantityPPackageO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "QuantityPPackageO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_UnitsPPackageC", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UnitsPPackageC", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_UnitsPPackageC", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UnitsPPackageC", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_QuantityPPackageO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "QuantityPPackageO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_UnitsPPackageO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UnitsPPackageO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_UnitsPPackageO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UnitsPPackageO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
@@ -2457,8 +2458,8 @@ SELECT InventoryID, StockMonth, QuantityPPackageC, UnitsPPackageC, QuantityPPack
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT InventoryID, StockMonth, QuantityPPackageC, UnitsPPackageC, QuantityPPacka" +
-                "geO, UnitsPPackageO FROM dbo.MonthlyStock";
+            this._commandCollection[0].CommandText = "SELECT InventoryID, StockMonth, QuantityPPackageC, QuantityPPackageO, UnitsPPacka" +
+                "geC, UnitsPPackageO FROM dbo.MonthlyStock";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -2519,19 +2520,24 @@ SELECT InventoryID, StockMonth, QuantityPPackageC, UnitsPPackageC, QuantityPPack
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_InventoryID, System.DateTime Original_StockMonth, int Original_QuantityPPackageC, global::System.Nullable<int> Original_UnitsPPackageC, int Original_QuantityPPackageO, global::System.Nullable<int> Original_UnitsPPackageO) {
+        public virtual int Delete(int Original_InventoryID, string Original_StockMonth, int Original_QuantityPPackageC, int Original_QuantityPPackageO, global::System.Nullable<int> Original_UnitsPPackageC, global::System.Nullable<int> Original_UnitsPPackageO) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_InventoryID));
-            this.Adapter.DeleteCommand.Parameters[1].Value = ((System.DateTime)(Original_StockMonth));
-            this.Adapter.DeleteCommand.Parameters[2].Value = ((int)(Original_QuantityPPackageC));
-            if ((Original_UnitsPPackageC.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((int)(Original_UnitsPPackageC.Value));
+            if ((Original_StockMonth == null)) {
+                throw new global::System.ArgumentNullException("Original_StockMonth");
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((string)(Original_StockMonth));
             }
-            this.Adapter.DeleteCommand.Parameters[5].Value = ((int)(Original_QuantityPPackageO));
+            this.Adapter.DeleteCommand.Parameters[2].Value = ((int)(Original_QuantityPPackageC));
+            this.Adapter.DeleteCommand.Parameters[3].Value = ((int)(Original_QuantityPPackageO));
+            if ((Original_UnitsPPackageC.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((int)(Original_UnitsPPackageC.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
             if ((Original_UnitsPPackageO.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[6].Value = ((object)(0));
                 this.Adapter.DeleteCommand.Parameters[7].Value = ((int)(Original_UnitsPPackageO.Value));
@@ -2560,17 +2566,22 @@ SELECT InventoryID, StockMonth, QuantityPPackageC, UnitsPPackageC, QuantityPPack
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(int InventoryID, System.DateTime StockMonth, int QuantityPPackageC, global::System.Nullable<int> UnitsPPackageC, int QuantityPPackageO, global::System.Nullable<int> UnitsPPackageO) {
+        public virtual int Insert(int InventoryID, string StockMonth, int QuantityPPackageC, int QuantityPPackageO, global::System.Nullable<int> UnitsPPackageC, global::System.Nullable<int> UnitsPPackageO) {
             this.Adapter.InsertCommand.Parameters[0].Value = ((int)(InventoryID));
-            this.Adapter.InsertCommand.Parameters[1].Value = ((System.DateTime)(StockMonth));
-            this.Adapter.InsertCommand.Parameters[2].Value = ((int)(QuantityPPackageC));
-            if ((UnitsPPackageC.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[3].Value = ((int)(UnitsPPackageC.Value));
+            if ((StockMonth == null)) {
+                throw new global::System.ArgumentNullException("StockMonth");
             }
             else {
-                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
+                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(StockMonth));
             }
-            this.Adapter.InsertCommand.Parameters[4].Value = ((int)(QuantityPPackageO));
+            this.Adapter.InsertCommand.Parameters[2].Value = ((int)(QuantityPPackageC));
+            this.Adapter.InsertCommand.Parameters[3].Value = ((int)(QuantityPPackageO));
+            if ((UnitsPPackageC.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[4].Value = ((int)(UnitsPPackageC.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
             if ((UnitsPPackageO.HasValue == true)) {
                 this.Adapter.InsertCommand.Parameters[5].Value = ((int)(UnitsPPackageO.Value));
             }
@@ -2597,17 +2608,22 @@ SELECT InventoryID, StockMonth, QuantityPPackageC, UnitsPPackageC, QuantityPPack
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int InventoryID, System.DateTime StockMonth, int QuantityPPackageC, global::System.Nullable<int> UnitsPPackageC, int QuantityPPackageO, global::System.Nullable<int> UnitsPPackageO, int Original_InventoryID, System.DateTime Original_StockMonth, int Original_QuantityPPackageC, global::System.Nullable<int> Original_UnitsPPackageC, int Original_QuantityPPackageO, global::System.Nullable<int> Original_UnitsPPackageO) {
+        public virtual int Update(int InventoryID, string StockMonth, int QuantityPPackageC, int QuantityPPackageO, global::System.Nullable<int> UnitsPPackageC, global::System.Nullable<int> UnitsPPackageO, int Original_InventoryID, string Original_StockMonth, int Original_QuantityPPackageC, int Original_QuantityPPackageO, global::System.Nullable<int> Original_UnitsPPackageC, global::System.Nullable<int> Original_UnitsPPackageO) {
             this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(InventoryID));
-            this.Adapter.UpdateCommand.Parameters[1].Value = ((System.DateTime)(StockMonth));
-            this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(QuantityPPackageC));
-            if ((UnitsPPackageC.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(UnitsPPackageC.Value));
+            if ((StockMonth == null)) {
+                throw new global::System.ArgumentNullException("StockMonth");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(StockMonth));
             }
-            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(QuantityPPackageO));
+            this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(QuantityPPackageC));
+            this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(QuantityPPackageO));
+            if ((UnitsPPackageC.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(UnitsPPackageC.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
             if ((UnitsPPackageO.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(UnitsPPackageO.Value));
             }
@@ -2615,17 +2631,22 @@ SELECT InventoryID, StockMonth, QuantityPPackageC, UnitsPPackageC, QuantityPPack
                 this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
             }
             this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(Original_InventoryID));
-            this.Adapter.UpdateCommand.Parameters[7].Value = ((System.DateTime)(Original_StockMonth));
-            this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(Original_QuantityPPackageC));
-            if ((Original_UnitsPPackageC.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((int)(Original_UnitsPPackageC.Value));
+            if ((Original_StockMonth == null)) {
+                throw new global::System.ArgumentNullException("Original_StockMonth");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(Original_StockMonth));
             }
-            this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(Original_QuantityPPackageO));
+            this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(Original_QuantityPPackageC));
+            this.Adapter.UpdateCommand.Parameters[9].Value = ((int)(Original_QuantityPPackageO));
+            if ((Original_UnitsPPackageC.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(Original_UnitsPPackageC.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
+            }
             if ((Original_UnitsPPackageO.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(0));
                 this.Adapter.UpdateCommand.Parameters[13].Value = ((int)(Original_UnitsPPackageO.Value));
@@ -2654,8 +2675,8 @@ SELECT InventoryID, StockMonth, QuantityPPackageC, UnitsPPackageC, QuantityPPack
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int QuantityPPackageC, global::System.Nullable<int> UnitsPPackageC, int QuantityPPackageO, global::System.Nullable<int> UnitsPPackageO, int Original_InventoryID, System.DateTime Original_StockMonth, int Original_QuantityPPackageC, global::System.Nullable<int> Original_UnitsPPackageC, int Original_QuantityPPackageO, global::System.Nullable<int> Original_UnitsPPackageO) {
-            return this.Update(Original_InventoryID, Original_StockMonth, QuantityPPackageC, UnitsPPackageC, QuantityPPackageO, UnitsPPackageO, Original_InventoryID, Original_StockMonth, Original_QuantityPPackageC, Original_UnitsPPackageC, Original_QuantityPPackageO, Original_UnitsPPackageO);
+        public virtual int Update(int QuantityPPackageC, int QuantityPPackageO, global::System.Nullable<int> UnitsPPackageC, global::System.Nullable<int> UnitsPPackageO, int Original_InventoryID, string Original_StockMonth, int Original_QuantityPPackageC, int Original_QuantityPPackageO, global::System.Nullable<int> Original_UnitsPPackageC, global::System.Nullable<int> Original_UnitsPPackageO) {
+            return this.Update(Original_InventoryID, Original_StockMonth, QuantityPPackageC, QuantityPPackageO, UnitsPPackageC, UnitsPPackageO, Original_InventoryID, Original_StockMonth, Original_QuantityPPackageC, Original_QuantityPPackageO, Original_UnitsPPackageC, Original_UnitsPPackageO);
         }
     }
     
