@@ -81,14 +81,15 @@ namespace QDentalStockApp26
         {
             int selectedIndex = comboBox1.SelectedIndex;
 
-            if (selectedIndex <= 0)
+             if (selectedIndex <= 0)
             {
                 MessageBox.Show("Cannot copy from a previous month.");
                 return;
             }
 
-            string selectedMonth = comboBox1.Items[selectedIndex].ToString();
-            string previousMonth = comboBox1.Items[selectedIndex - 1].ToString();
+             string selectedMonth = comboBox1.Items[selectedIndex].ToString();
+             string previousMonth = comboBox1.Items[selectedIndex - 1].ToString();
+            //string selectedMonth = "january";
 
             string sql = @"
 IF NOT EXISTS (
@@ -103,36 +104,61 @@ BEGIN
     VALUES
     (@ItemID, @StockMonth, @QuantityC, @QuantityO, @UnitsC, @UnitsO)
 END";
+            string sqlVariance = @"
+IF NOT EXISTS (
+    SELECT 1
+    FROM VarianceTable
+    WHERE InventoryID = @ItemID
+      AND StockMonth = @StockMonth
+)
+BEGIN
+    INSERT INTO VarianceTable
+    (InventoryID, StockMonth, OverStocked, NeedToOrder, Status)
+    VALUES
+    (@ItemID, @StockMonth, 0, 0, 'Good')
+END";
 
             MessageBox.Show("ready to edit closing stock for " + comboBox1.SelectedItem);
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             using (SqlCommand cmd = new SqlCommand(sql, conn))
+            using (SqlCommand cmdVar = new SqlCommand(sqlVariance, conn)) // second command
             {
                 conn.Open();
 
+                // Parameters for MonthlyStock insert
                 cmd.Parameters.Add("@ItemID", SqlDbType.Int);
                 cmd.Parameters.Add("@StockMonth", SqlDbType.VarChar, 10);
                 cmd.Parameters.Add("@QuantityC", SqlDbType.Int);
-                cmd.Parameters.Add("@UnitsO", SqlDbType.Int);
                 cmd.Parameters.Add("@QuantityO", SqlDbType.Int);
                 cmd.Parameters.Add("@UnitsC", SqlDbType.Int);
+                cmd.Parameters.Add("@UnitsO", SqlDbType.Int);
+
+                // Parameters for VarianceTable insert
+                cmdVar.Parameters.Add("@ItemID", SqlDbType.Int);
+                cmdVar.Parameters.Add("@StockMonth", SqlDbType.VarChar, 10);
 
                 foreach (Stock.MonthlyStockItem item in stock.GetStockList())
                 {
                     if (item.month == previousMonth)
                     {
+                        // Insert into MonthlyStock
                         cmd.Parameters["@ItemID"].Value = item.id;
                         cmd.Parameters["@StockMonth"].Value = selectedMonth;
                         cmd.Parameters["@QuantityC"].Value = item.qtyPpackC;
                         cmd.Parameters["@QuantityO"].Value = item.qtyPpackC;
                         cmd.Parameters["@UnitsC"].Value = item.unitsPpackC;
                         cmd.Parameters["@UnitsO"].Value = item.unitsPpackO;
-
                         cmd.ExecuteNonQuery();
+
+                        // Insert into VarianceTable
+                        cmdVar.Parameters["@ItemID"].Value = item.id;
+                        cmdVar.Parameters["@StockMonth"].Value = selectedMonth;
+                        cmdVar.ExecuteNonQuery();
                     }
                 }
             }
+
 
             MessageBox.Show("Database updated");
             Form4 frm = new Form4(comboBox1.SelectedItem.ToString());

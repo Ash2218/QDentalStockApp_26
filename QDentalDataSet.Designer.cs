@@ -30,9 +30,15 @@ namespace QDentalStockApp26 {
         
         private VarianceDataTable tableVariance;
         
+        private VarianceTableDataTable tableVarianceTable;
+        
         private global::System.Data.DataRelation relationFK_Stock_Item;
         
         private global::System.Data.DataRelation relationFK_variance_item;
+        
+        private global::System.Data.DataRelation relationFK_Variance_Items;
+        
+        private global::System.Data.DataRelation relationFK_Variance_MonthlyStock;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -70,6 +76,9 @@ namespace QDentalStockApp26 {
                 }
                 if ((ds.Tables["Variance"] != null)) {
                     base.Tables.Add(new VarianceDataTable(ds.Tables["Variance"]));
+                }
+                if ((ds.Tables["VarianceTable"] != null)) {
+                    base.Tables.Add(new VarianceTableDataTable(ds.Tables["VarianceTable"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -116,6 +125,16 @@ namespace QDentalStockApp26 {
         public VarianceDataTable Variance {
             get {
                 return this.tableVariance;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public VarianceTableDataTable VarianceTable {
+            get {
+                return this.tableVarianceTable;
             }
         }
         
@@ -195,6 +214,9 @@ namespace QDentalStockApp26 {
                 if ((ds.Tables["Variance"] != null)) {
                     base.Tables.Add(new VarianceDataTable(ds.Tables["Variance"]));
                 }
+                if ((ds.Tables["VarianceTable"] != null)) {
+                    base.Tables.Add(new VarianceTableDataTable(ds.Tables["VarianceTable"]));
+                }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
                 this.Namespace = ds.Namespace;
@@ -246,8 +268,16 @@ namespace QDentalStockApp26 {
                     this.tableVariance.InitVars();
                 }
             }
+            this.tableVarianceTable = ((VarianceTableDataTable)(base.Tables["VarianceTable"]));
+            if ((initTable == true)) {
+                if ((this.tableVarianceTable != null)) {
+                    this.tableVarianceTable.InitVars();
+                }
+            }
             this.relationFK_Stock_Item = this.Relations["FK_Stock_Item"];
             this.relationFK_variance_item = this.Relations["FK_variance_item"];
+            this.relationFK_Variance_Items = this.Relations["FK_Variance_Items"];
+            this.relationFK_Variance_MonthlyStock = this.Relations["FK_Variance_MonthlyStock"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -264,6 +294,8 @@ namespace QDentalStockApp26 {
             base.Tables.Add(this.tableMonthlyStock);
             this.tableVariance = new VarianceDataTable();
             base.Tables.Add(this.tableVariance);
+            this.tableVarianceTable = new VarianceTableDataTable();
+            base.Tables.Add(this.tableVarianceTable);
             this.relationFK_Stock_Item = new global::System.Data.DataRelation("FK_Stock_Item", new global::System.Data.DataColumn[] {
                         this.tableItems.InventoryIDColumn}, new global::System.Data.DataColumn[] {
                         this.tableMonthlyStock.InventoryIDColumn}, false);
@@ -272,6 +304,16 @@ namespace QDentalStockApp26 {
                         this.tableItems.InventoryIDColumn}, new global::System.Data.DataColumn[] {
                         this.tableVariance.InventoryIDColumn}, false);
             this.Relations.Add(this.relationFK_variance_item);
+            this.relationFK_Variance_Items = new global::System.Data.DataRelation("FK_Variance_Items", new global::System.Data.DataColumn[] {
+                        this.tableItems.InventoryIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableVarianceTable.InventoryIDColumn}, false);
+            this.Relations.Add(this.relationFK_Variance_Items);
+            this.relationFK_Variance_MonthlyStock = new global::System.Data.DataRelation("FK_Variance_MonthlyStock", new global::System.Data.DataColumn[] {
+                        this.tableMonthlyStock.InventoryIDColumn,
+                        this.tableMonthlyStock.StockMonthColumn}, new global::System.Data.DataColumn[] {
+                        this.tableVarianceTable.InventoryIDColumn,
+                        this.tableVarianceTable.StockMonthColumn}, false);
+            this.Relations.Add(this.relationFK_Variance_MonthlyStock);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -289,6 +331,12 @@ namespace QDentalStockApp26 {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
         private bool ShouldSerializeVariance() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+        private bool ShouldSerializeVarianceTable() {
             return false;
         }
         
@@ -355,6 +403,9 @@ namespace QDentalStockApp26 {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
         public delegate void VarianceRowChangeEventHandler(object sender, VarianceRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+        public delegate void VarianceTableRowChangeEventHandler(object sender, VarianceTableRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -1350,6 +1401,330 @@ namespace QDentalStockApp26 {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class VarianceTableDataTable : global::System.Data.TypedTableBase<VarianceTableRow> {
+            
+            private global::System.Data.DataColumn columnInventoryID;
+            
+            private global::System.Data.DataColumn columnStockMonth;
+            
+            private global::System.Data.DataColumn columnOverStocked;
+            
+            private global::System.Data.DataColumn columnNeedToOrder;
+            
+            private global::System.Data.DataColumn columnStatus;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public VarianceTableDataTable() {
+                this.TableName = "VarianceTable";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            internal VarianceTableDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            protected VarianceTableDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public global::System.Data.DataColumn InventoryIDColumn {
+                get {
+                    return this.columnInventoryID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public global::System.Data.DataColumn StockMonthColumn {
+                get {
+                    return this.columnStockMonth;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public global::System.Data.DataColumn OverStockedColumn {
+                get {
+                    return this.columnOverStocked;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public global::System.Data.DataColumn NeedToOrderColumn {
+                get {
+                    return this.columnNeedToOrder;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public global::System.Data.DataColumn StatusColumn {
+                get {
+                    return this.columnStatus;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public VarianceTableRow this[int index] {
+                get {
+                    return ((VarianceTableRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public event VarianceTableRowChangeEventHandler VarianceTableRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public event VarianceTableRowChangeEventHandler VarianceTableRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public event VarianceTableRowChangeEventHandler VarianceTableRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public event VarianceTableRowChangeEventHandler VarianceTableRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public void AddVarianceTableRow(VarianceTableRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public VarianceTableRow AddVarianceTableRow(ItemsRow parentItemsRowByFK_Variance_Items, string StockMonth, bool OverStocked, bool NeedToOrder, string Status) {
+                VarianceTableRow rowVarianceTableRow = ((VarianceTableRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        StockMonth,
+                        OverStocked,
+                        NeedToOrder,
+                        Status};
+                if ((parentItemsRowByFK_Variance_Items != null)) {
+                    columnValuesArray[0] = parentItemsRowByFK_Variance_Items[0];
+                }
+                rowVarianceTableRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowVarianceTableRow);
+                return rowVarianceTableRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public VarianceTableRow FindByInventoryIDStockMonth(int InventoryID, string StockMonth) {
+                return ((VarianceTableRow)(this.Rows.Find(new object[] {
+                            InventoryID,
+                            StockMonth})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                VarianceTableDataTable cln = ((VarianceTableDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new VarianceTableDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            internal void InitVars() {
+                this.columnInventoryID = base.Columns["InventoryID"];
+                this.columnStockMonth = base.Columns["StockMonth"];
+                this.columnOverStocked = base.Columns["OverStocked"];
+                this.columnNeedToOrder = base.Columns["NeedToOrder"];
+                this.columnStatus = base.Columns["Status"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            private void InitClass() {
+                this.columnInventoryID = new global::System.Data.DataColumn("InventoryID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnInventoryID);
+                this.columnStockMonth = new global::System.Data.DataColumn("StockMonth", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnStockMonth);
+                this.columnOverStocked = new global::System.Data.DataColumn("OverStocked", typeof(bool), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOverStocked);
+                this.columnNeedToOrder = new global::System.Data.DataColumn("NeedToOrder", typeof(bool), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNeedToOrder);
+                this.columnStatus = new global::System.Data.DataColumn("Status", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnStatus);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnInventoryID,
+                                this.columnStockMonth}, true));
+                this.columnInventoryID.AllowDBNull = false;
+                this.columnStockMonth.AllowDBNull = false;
+                this.columnStockMonth.MaxLength = 10;
+                this.columnOverStocked.AllowDBNull = false;
+                this.columnNeedToOrder.AllowDBNull = false;
+                this.columnStatus.AllowDBNull = false;
+                this.columnStatus.MaxLength = 20;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public VarianceTableRow NewVarianceTableRow() {
+                return ((VarianceTableRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new VarianceTableRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(VarianceTableRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.VarianceTableRowChanged != null)) {
+                    this.VarianceTableRowChanged(this, new VarianceTableRowChangeEvent(((VarianceTableRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.VarianceTableRowChanging != null)) {
+                    this.VarianceTableRowChanging(this, new VarianceTableRowChangeEvent(((VarianceTableRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.VarianceTableRowDeleted != null)) {
+                    this.VarianceTableRowDeleted(this, new VarianceTableRowChangeEvent(((VarianceTableRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.VarianceTableRowDeleting != null)) {
+                    this.VarianceTableRowDeleting(this, new VarianceTableRowChangeEvent(((VarianceTableRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public void RemoveVarianceTableRow(VarianceTableRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                QDentalDataSet ds = new QDentalDataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "VarianceTableDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         public partial class ItemsRow : global::System.Data.DataRow {
@@ -1512,6 +1887,17 @@ namespace QDentalStockApp26 {
                     return ((VarianceRow[])(base.GetChildRows(this.Table.ChildRelations["FK_variance_item"])));
                 }
             }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public VarianceTableRow[] GetVarianceTableRows() {
+                if ((this.Table.ChildRelations["FK_Variance_Items"] == null)) {
+                    return new VarianceTableRow[0];
+                }
+                else {
+                    return ((VarianceTableRow[])(base.GetChildRows(this.Table.ChildRelations["FK_Variance_Items"])));
+                }
+            }
         }
         
         /// <summary>
@@ -1638,6 +2024,17 @@ namespace QDentalStockApp26 {
             public void SetUnitsPPackageONull() {
                 this[this.tableMonthlyStock.UnitsPPackageOColumn] = global::System.Convert.DBNull;
             }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public VarianceTableRow[] GetVarianceTableRows() {
+                if ((this.Table.ChildRelations["FK_Variance_MonthlyStock"] == null)) {
+                    return new VarianceTableRow[0];
+                }
+                else {
+                    return ((VarianceTableRow[])(base.GetChildRows(this.Table.ChildRelations["FK_Variance_MonthlyStock"])));
+                }
+            }
         }
         
         /// <summary>
@@ -1724,6 +2121,98 @@ namespace QDentalStockApp26 {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
             public void SetStatusNull() {
                 this[this.tableVariance.StatusColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class VarianceTableRow : global::System.Data.DataRow {
+            
+            private VarianceTableDataTable tableVarianceTable;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            internal VarianceTableRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableVarianceTable = ((VarianceTableDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public int InventoryID {
+                get {
+                    return ((int)(this[this.tableVarianceTable.InventoryIDColumn]));
+                }
+                set {
+                    this[this.tableVarianceTable.InventoryIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public string StockMonth {
+                get {
+                    return ((string)(this[this.tableVarianceTable.StockMonthColumn]));
+                }
+                set {
+                    this[this.tableVarianceTable.StockMonthColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public bool OverStocked {
+                get {
+                    return ((bool)(this[this.tableVarianceTable.OverStockedColumn]));
+                }
+                set {
+                    this[this.tableVarianceTable.OverStockedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public bool NeedToOrder {
+                get {
+                    return ((bool)(this[this.tableVarianceTable.NeedToOrderColumn]));
+                }
+                set {
+                    this[this.tableVarianceTable.NeedToOrderColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public string Status {
+                get {
+                    return ((string)(this[this.tableVarianceTable.StatusColumn]));
+                }
+                set {
+                    this[this.tableVarianceTable.StatusColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public ItemsRow ItemsRow {
+                get {
+                    return ((ItemsRow)(this.GetParentRow(this.Table.ParentRelations["FK_Variance_Items"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_Variance_Items"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public MonthlyStockRow MonthlyStockRowParent {
+                get {
+                    return ((MonthlyStockRow)(this.GetParentRow(this.Table.ParentRelations["FK_Variance_MonthlyStock"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_Variance_MonthlyStock"]);
+                }
             }
         }
         
@@ -1815,6 +2304,40 @@ namespace QDentalStockApp26 {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
             public VarianceRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+        public class VarianceTableRowChangeEvent : global::System.EventArgs {
+            
+            private VarianceTableRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public VarianceTableRowChangeEvent(VarianceTableRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public VarianceTableRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -3028,6 +3551,374 @@ SELECT OverStocked, UnderStocked, Status, InventoryID FROM Variance WHERE (Inven
     }
     
     /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class VarianceTableTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+        public VarianceTableTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "VarianceTable";
+            tableMapping.ColumnMappings.Add("InventoryID", "InventoryID");
+            tableMapping.ColumnMappings.Add("StockMonth", "StockMonth");
+            tableMapping.ColumnMappings.Add("OverStocked", "OverStocked");
+            tableMapping.ColumnMappings.Add("NeedToOrder", "NeedToOrder");
+            tableMapping.ColumnMappings.Add("Status", "Status");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM [VarianceTable] WHERE (([InventoryID] = @Original_InventoryID) AND ([" +
+                "StockMonth] = @Original_StockMonth) AND ([OverStocked] = @Original_OverStocked) " +
+                "AND ([NeedToOrder] = @Original_NeedToOrder) AND ([Status] = @Original_Status))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_InventoryID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "InventoryID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_StockMonth", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "StockMonth", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_OverStocked", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "OverStocked", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_NeedToOrder", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "NeedToOrder", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Status", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Status", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [VarianceTable] ([InventoryID], [StockMonth], [OverStocked], [NeedToOrder], [Status]) VALUES (@InventoryID, @StockMonth, @OverStocked, @NeedToOrder, @Status);
+SELECT InventoryID, StockMonth, OverStocked, NeedToOrder, Status FROM VarianceTable WHERE (InventoryID = @InventoryID) AND (StockMonth = @StockMonth)";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@InventoryID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "InventoryID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@StockMonth", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "StockMonth", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@OverStocked", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "OverStocked", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@NeedToOrder", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "NeedToOrder", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Status", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Status", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [VarianceTable] SET [InventoryID] = @InventoryID, [StockMonth] = @StockMonth, [OverStocked] = @OverStocked, [NeedToOrder] = @NeedToOrder, [Status] = @Status WHERE (([InventoryID] = @Original_InventoryID) AND ([StockMonth] = @Original_StockMonth) AND ([OverStocked] = @Original_OverStocked) AND ([NeedToOrder] = @Original_NeedToOrder) AND ([Status] = @Original_Status));
+SELECT InventoryID, StockMonth, OverStocked, NeedToOrder, Status FROM VarianceTable WHERE (InventoryID = @InventoryID) AND (StockMonth = @StockMonth)";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@InventoryID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "InventoryID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@StockMonth", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "StockMonth", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@OverStocked", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "OverStocked", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@NeedToOrder", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "NeedToOrder", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Status", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Status", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_InventoryID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "InventoryID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_StockMonth", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "StockMonth", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_OverStocked", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "OverStocked", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_NeedToOrder", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "NeedToOrder", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Status", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Status", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::QDentalStockApp26.Properties.Settings.Default.QDentalConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT InventoryID, StockMonth, OverStocked, NeedToOrder, Status\r\nFROM VarianceTa" +
+                "ble";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(QDentalDataSet.VarianceTableDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual QDentalDataSet.VarianceTableDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            QDentalDataSet.VarianceTableDataTable dataTable = new QDentalDataSet.VarianceTableDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(QDentalDataSet.VarianceTableDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(QDentalDataSet dataSet) {
+            return this.Adapter.Update(dataSet, "VarianceTable");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(int Original_InventoryID, string Original_StockMonth, bool Original_OverStocked, bool Original_NeedToOrder, string Original_Status) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_InventoryID));
+            if ((Original_StockMonth == null)) {
+                throw new global::System.ArgumentNullException("Original_StockMonth");
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((string)(Original_StockMonth));
+            }
+            this.Adapter.DeleteCommand.Parameters[2].Value = ((bool)(Original_OverStocked));
+            this.Adapter.DeleteCommand.Parameters[3].Value = ((bool)(Original_NeedToOrder));
+            if ((Original_Status == null)) {
+                throw new global::System.ArgumentNullException("Original_Status");
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((string)(Original_Status));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(int InventoryID, string StockMonth, bool OverStocked, bool NeedToOrder, string Status) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((int)(InventoryID));
+            if ((StockMonth == null)) {
+                throw new global::System.ArgumentNullException("StockMonth");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(StockMonth));
+            }
+            this.Adapter.InsertCommand.Parameters[2].Value = ((bool)(OverStocked));
+            this.Adapter.InsertCommand.Parameters[3].Value = ((bool)(NeedToOrder));
+            if ((Status == null)) {
+                throw new global::System.ArgumentNullException("Status");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[4].Value = ((string)(Status));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(int InventoryID, string StockMonth, bool OverStocked, bool NeedToOrder, string Status, int Original_InventoryID, string Original_StockMonth, bool Original_OverStocked, bool Original_NeedToOrder, string Original_Status) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(InventoryID));
+            if ((StockMonth == null)) {
+                throw new global::System.ArgumentNullException("StockMonth");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(StockMonth));
+            }
+            this.Adapter.UpdateCommand.Parameters[2].Value = ((bool)(OverStocked));
+            this.Adapter.UpdateCommand.Parameters[3].Value = ((bool)(NeedToOrder));
+            if ((Status == null)) {
+                throw new global::System.ArgumentNullException("Status");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((string)(Status));
+            }
+            this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Original_InventoryID));
+            if ((Original_StockMonth == null)) {
+                throw new global::System.ArgumentNullException("Original_StockMonth");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((string)(Original_StockMonth));
+            }
+            this.Adapter.UpdateCommand.Parameters[7].Value = ((bool)(Original_OverStocked));
+            this.Adapter.UpdateCommand.Parameters[8].Value = ((bool)(Original_NeedToOrder));
+            if ((Original_Status == null)) {
+                throw new global::System.ArgumentNullException("Original_Status");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(Original_Status));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(bool OverStocked, bool NeedToOrder, string Status, int Original_InventoryID, string Original_StockMonth, bool Original_OverStocked, bool Original_NeedToOrder, string Original_Status) {
+            return this.Update(Original_InventoryID, Original_StockMonth, OverStocked, NeedToOrder, Status, Original_InventoryID, Original_StockMonth, Original_OverStocked, Original_NeedToOrder, Original_Status);
+        }
+    }
+    
+    /// <summary>
     ///TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
     ///</summary>
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3044,6 +3935,8 @@ SELECT OverStocked, UnderStocked, Status, InventoryID FROM Variance WHERE (Inven
         private MonthlyStockTableAdapter _monthlyStockTableAdapter;
         
         private VarianceTableAdapter _varianceTableAdapter;
+        
+        private VarianceTableTableAdapter _varianceTableTableAdapter;
         
         private bool _backupDataSetBeforeUpdate;
         
@@ -3104,6 +3997,20 @@ SELECT OverStocked, UnderStocked, Status, InventoryID FROM Variance WHERE (Inven
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
+            "a", "System.Drawing.Design.UITypeEditor")]
+        public VarianceTableTableAdapter VarianceTableTableAdapter {
+            get {
+                return this._varianceTableTableAdapter;
+            }
+            set {
+                this._varianceTableTableAdapter = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
         public bool BackupDataSetBeforeUpdate {
             get {
                 return this._backupDataSetBeforeUpdate;
@@ -3133,6 +4040,10 @@ SELECT OverStocked, UnderStocked, Status, InventoryID FROM Variance WHERE (Inven
                             && (this._varianceTableAdapter.Connection != null))) {
                     return this._varianceTableAdapter.Connection;
                 }
+                if (((this._varianceTableTableAdapter != null) 
+                            && (this._varianceTableTableAdapter.Connection != null))) {
+                    return this._varianceTableTableAdapter.Connection;
+                }
                 return null;
             }
             set {
@@ -3153,6 +4064,9 @@ SELECT OverStocked, UnderStocked, Status, InventoryID FROM Variance WHERE (Inven
                     count = (count + 1);
                 }
                 if ((this._varianceTableAdapter != null)) {
+                    count = (count + 1);
+                }
+                if ((this._varianceTableTableAdapter != null)) {
                     count = (count + 1);
                 }
                 return count;
@@ -3193,6 +4107,15 @@ SELECT OverStocked, UnderStocked, Status, InventoryID FROM Variance WHERE (Inven
                     allChangedRows.AddRange(updatedRows);
                 }
             }
+            if ((this._varianceTableTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.VarianceTable.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._varianceTableTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
             return result;
         }
         
@@ -3227,6 +4150,14 @@ SELECT OverStocked, UnderStocked, Status, InventoryID FROM Variance WHERE (Inven
                     allAddedRows.AddRange(addedRows);
                 }
             }
+            if ((this._varianceTableTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.VarianceTable.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._varianceTableTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
             return result;
         }
         
@@ -3237,6 +4168,14 @@ SELECT OverStocked, UnderStocked, Status, InventoryID FROM Variance WHERE (Inven
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
         private int UpdateDeletedRows(QDentalDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
+            if ((this._varianceTableTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.VarianceTable.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._varianceTableTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
             if ((this._varianceTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.Variance.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
@@ -3315,6 +4254,11 @@ SELECT OverStocked, UnderStocked, Status, InventoryID FROM Variance WHERE (Inven
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
+            if (((this._varianceTableTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._varianceTableTableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
+                        "tring.");
+            }
             global::System.Data.IDbConnection workConnection = this.Connection;
             if ((workConnection == null)) {
                 throw new global::System.ApplicationException("TableAdapterManager contains no connection information. Set each TableAdapterMana" +
@@ -3372,6 +4316,15 @@ SELECT OverStocked, UnderStocked, Status, InventoryID FROM Variance WHERE (Inven
                     if (this._varianceTableAdapter.Adapter.AcceptChangesDuringUpdate) {
                         this._varianceTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
                         adaptersWithAcceptChangesDuringUpdate.Add(this._varianceTableAdapter.Adapter);
+                    }
+                }
+                if ((this._varianceTableTableAdapter != null)) {
+                    revertConnections.Add(this._varianceTableTableAdapter, this._varianceTableTableAdapter.Connection);
+                    this._varianceTableTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._varianceTableTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._varianceTableTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._varianceTableTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._varianceTableTableAdapter.Adapter);
                     }
                 }
                 // 
@@ -3443,6 +4396,10 @@ SELECT OverStocked, UnderStocked, Status, InventoryID FROM Variance WHERE (Inven
                 if ((this._varianceTableAdapter != null)) {
                     this._varianceTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._varianceTableAdapter]));
                     this._varianceTableAdapter.Transaction = null;
+                }
+                if ((this._varianceTableTableAdapter != null)) {
+                    this._varianceTableTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._varianceTableTableAdapter]));
+                    this._varianceTableTableAdapter.Transaction = null;
                 }
                 if ((0 < adaptersWithAcceptChangesDuringUpdate.Count)) {
                     global::System.Data.Common.DataAdapter[] adapters = new System.Data.Common.DataAdapter[adaptersWithAcceptChangesDuringUpdate.Count];
